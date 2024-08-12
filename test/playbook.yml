@@ -1,0 +1,20 @@
+# playbook.yml
+- name: Configure Apache server
+  hosts: web
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Start Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Copy HTML file
+      copy:
+        src: /path/to/index.html
+        dest: /var/www/html/index.html
